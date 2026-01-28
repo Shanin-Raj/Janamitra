@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTI & Complaints | Janamithra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 45px;
+        }
+
+        .logo-text .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 4rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ux4g-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Portal Grid */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Form Card */
+        .form-card {
+            padding: 2rem;
+        }
+
+        .role-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .role-tab {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .role-tab.active {
+            background: var(--ux4g-primary);
+            color: white;
+        }
+
+        .role-tab:hover:not(.active) {
+            background: #e9ecef;
+        }
+
+        .form-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-card h2 i {
+            color: var(--ux4g-primary);
+        }
+
+        /* FAQ Section */
+        .faq-card {
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .faq-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-card h3 i {
+            color: var(--ux4g-primary);
+        }
+
+        .faq-item {
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item h4 {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-item p {
+            font-size: 0.9rem;
+        }
+
+        /* Info Alert */
+        .info-alert {
+            background: #eff6ff;
+            border-left: 4px solid var(--ux4g-info);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-alert i {
+            color: var(--ux4g-info);
+            margin-top: 2px;
+        }
+
+        .info-alert p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        @media (max-width: 968px) {
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tricolor-strip"></div>
+
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                </div>
+            </a>
+            <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </header>
+
+    <main class="container page-content animate-fade-in">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a> <span>/</span> RTI & Grievance Portal
+        </nav>
+
+        <div class="page-header">
+            <h1>RTI & Grievance Portal</h1>
+            <p>Ensure your voice is heard and keep the administration accountable.</p>
+        </div>
+
+        <div class="portal-grid">
+            <!-- Form Section -->
+            <div class="form-card card">
+                <div class="role-tabs">
+                    <button class="role-tab active" onclick="setMode('rti', this)"><i class="fas fa-file-alt"></i> Right
+                        to Information</button>
+                    <button class="role-tab" onclick="setMode('complaint', this)"><i
+                            class="fas fa-exclamation-triangle"></i> File Complaint</button>
+                </div>
+
+                <h2 id="form-title"><i class="fas fa-file-signature"></i> <span>File an RTI Request</span></h2>
+
+                <div class="info-alert" id="info-msg">
+                    <i class="fas fa-info-circle"></i>
+                    <p>RTI requests are processed within 30 days as per the Right to Information Act, 2005.</p>
+                </div>
+
+                <form onsubmit="handleFormSubmit(event)">
+                    <div class="input-group" id="complaint-category-group" style="display: none;">
+                        <label for="category">Complaint Category</label>
+                        <select id="category">
+                            <option value="">Select a Category</option>
+                            <option value="infra">Infrastructure (Roads/Water/Street Lights)</option>
+                            <option value="sanitation">Sanitation & Garbage</option>
+                            <option value="scheme">Scheme Implementation Issue</option>
+                            <option value="corruption">Corruption/Malpractice</option>
+                            <option value="other">Other Grievance</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="subject" id="subject-label">Information Required</label>
+                        <input type="text" id="subject" placeholder="Briefly state what information you need" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="description">Detailed Description</label>
+                        <textarea id="description" placeholder="Provide full details to help us process your request..."
+                            rows="5" required></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="attachment">Attachment (Optional)</label>
+                        <input type="file" id="attachment">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem; padding: 14px;">
+                        <i class="fas fa-paper-plane"></i> <span id="submit-btn-text">Submit RTI Request</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-card card">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+
+                <div class="faq-item">
+                    <h4>How long does it take for a reply?</h4>
+                    <p>Standard grievances are addressed within 7-10 working days. RTI requests are processed within 30
+                        days as per government norms.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I file an anonymous complaint?</h4>
+                    <p>For serious issues, you can choose to hide your identity from the public portal, but valid EPIC
+                        is required for verification.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What documents are needed for RTI?</h4>
+                    <p>A clear description of the information requested and your digital signature/voter ID proof is
+                        sufficient.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How can I track my request?</h4>
+                    <p>After submission, you will receive a Reference ID. Use this ID on the "Track Status" page to
+                        monitor progress.</p>
+                </div>
+            </div>
+
+            <!-- My Requests Section -->
+            <section style="margin-top: 3rem;">
+                <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-list-alt" style="color: var(--ux4g-primary);"></i> My Previous Requests
+                </h2>
+                <div id="complaints-list">
+                    <!-- Dynamic content will be loaded here -->
+                    <p style="color: var(--text-muted);">Loading your requests...</p>
+                </div>
+            </section>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let currentMode = 'rti';
+
+        function setMode(mode, btn) {
+            currentMode = mode;
+
+            // Toggle Active Class
+            document.querySelectorAll('.role-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // UI Elements
+            const formTitle = document.getElementById('form-title');
+            const infoMsg = document.getElementById('info-msg');
+            const categoryGroup = document.getElementById('complaint-category-group');
+            const subjectLabel = document.getElementById('subject-label');
+            const subjectInput = document.getElementById('subject');
+            const submitBtnText = document.getElementById('submit-btn-text');
+
+            if (mode === 'rti') {
+                formTitle.innerHTML = '<i class="fas fa-file-signature"></i> <span>File an RTI Request</span>';
+                infoMsg.innerHTML = '<i class="fas fa-info-circle"></i> <p>RTI requests are processed within 30 days as per the Right to Information Act, 2005.</p>';
+                infoMsg.style.borderLeftColor = 'var(--ux4g-info)';
+                infoMsg.querySelector('i').style.color = 'var(--ux4g-info)';
+
+                categoryGroup.style.display = 'none';
+                document.getElementById('category').required = false;
+
+                subjectLabel.innerText = 'Information Required';
+                subjectInput.placeholder = 'Briefly state what information you need';
+
+                submitBtnText.innerText = 'Submit RTI Request';
+            } else {
+                formTitle.innerHTML = '<i class="fas fa-exclamation-circle"></i> <span>Lodge a Grievance</span>';
+                infoMsg.innerHTML = '<i class="fas fa-clock"></i> <p>Grievances are typically addressed within 7-10 working days depending on severity.</p>';
+
+                // Change alert style for complaint (using warning color)
+                infoMsg.style.borderLeftColor = '#eab308';
+                infoMsg.querySelector('i').style.color = '#eab308';
+
+                categoryGroup.style.display = 'block';
+                document.getElementById('category').required = true;
+
+                subjectLabel.innerText = 'Complaint Subject';
+                subjectInput.placeholder = 'e.g., Street Light not working in Ward 4';
+
+                submitBtnText.innerText = 'Submit Complaint';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const session = requireAuth();
+            if (!session) return;
+
+            const panchayatId = session.panchayatId;
+            const citizenName = session.userData.citizen.name;
+            const epicId = session.epicId;
+
+            const complaintData = {
+                subject: document.getElementById('subject').value,
+                category: currentMode === 'complaint' ? document.getElementById('category').value : 'RTI',
+                description: document.getElementById('description').value
+            };
+
+            if (currentMode === 'complaint') {
+                // Save complaint to database
+                addComplaint(panchayatId, citizenName, epicId, complaintData);
+                saveToStorage();
+                alert(`Complaint submitted successfully! Reference ID: CMP${panchayatId}-${Date.now()}`);
+            } else {
+                // RTI Request
+                alert(`RTI Request submitted successfully! Reference ID: EGRAM-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000)}`);
+            }
+            
+            e.target.reset();
+            if (currentMode === 'complaint') {
+                document.getElementById('category').value = "";
+            }
+
+            // Reload complaints list
+            loadComplaints();
+        }
+
+        function loadComplaints() {
+            const session = getSession();
+            if (!session) return;
+
+            const epicId = session.epicId;
+            const myComplaints = getRTIComplaintsByCitizen(epicId);
+
+            const complaintsList = document.getElementById('complaints-list');
+            
+            if (myComplaints.length === 0) {
+                complaintsList.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 2rem;">No complaints filed yet.</p>';
+                return;
+            }
+
+            const getCategoryIcon = (category) => {
+                const icons = {
+                    'infra': 'fa-road',
+                    'sanitation': 'fa-trash',
+                    'scheme': 'fa-file-alt',
+                    'corruption': 'fa-exclamation-circle',
+                    'other': 'fa-question-circle'
+                };
+                return icons[category] || 'fa-exclamation-triangle';
+            };
+
+            const getStatusColor = (status) => {
+                const colors = {
+                    'Pending': '#fbbf24',
+                    'In Progress': '#3b82f6',
+                    'Resolved': '#10b981'
+                };
+                return colors[status] || '#6b7280';
+            };
+
+            complaintsList.innerHTML = `
+                <div class="complaints-table">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--bg-light);">
+                                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color); font-weight: 600; font-size: 0.85rem; color: var(--text-muted);">ID</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color); font-weight: 600; font-size: 0.85rem; color: var(--text-muted);">Subject</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color); font-weight: 600; font-size: 0.85rem; color: var(--text-muted);">Category</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color); font-weight: 600; font-size: 0.85rem; color: var(--text-muted);">Filed On</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid var(--border-color); font-weight: 600; font-size: 0.85rem; color: var(--text-muted);">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${myComplaints.map(complaint => `
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 1rem; font-weight: 600; font-size: 0.9rem;">${complaint.id}</td>
+                                    <td style="padding: 1rem; font-size: 0.9rem;">${complaint.subject}</td>
+                                    <td style="padding: 1rem; font-size: 0.9rem;">
+                                        <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                            <i class="fas ${getCategoryIcon(complaint.category)}"></i> ${complaint.category}
+                                        </span>
+                                    </td>
+                                    <td style="padding: 1rem; font-size: 0.9rem; color: var(--text-muted);">${complaint.date}</td>
+                                    <td style="padding: 1rem;">
+                                        <span style="display: inline-block; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; background: ${getStatusColor(complaint.status)}20; color: ${getStatusColor(complaint.status)};">
+                                            ${complaint.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Load complaints on page load
+        document.addEventListener('DOMContentLoaded', loadComplaints);
+    </script>
+</body>
+
+</html>

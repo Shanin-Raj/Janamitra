@@ -1,0 +1,226 @@
+/* UX4G - Government of India Design System */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    /* UX4G Color Palette */
+    --ux4g-primary: #6c5ce7;
+    --ux4g-primary-dark: #5b4cdb;
+    --ux4g-primary-light: #a29bfe;
+    --ux4g-success: #00b894;
+    --ux4g-warning: #fdcb6e;
+    --ux4g-danger: #d63031;
+    --ux4g-info: #0984e3;
+
+    /* Government Colors */
+    --saffron: #FF9933;
+    --white: #FFFFFF;
+    --green: #138808;
+    --navy: #000080;
+
+    /* Neutrals */
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --radius: 8px;
+    --radius-lg: 12px;
+    --transition: all 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+/* Government Tricolor Strip */
+.tricolor-strip {
+    height: 4px;
+    background: linear-gradient(to right, var(--saffron) 33.33%, var(--white) 33.33%, var(--white) 66.66%, var(--green) 66.66%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+p {
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Buttons - UX4G Style */
+.btn {
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--ux4g-primary);
+    color: white;
+    border-color: var(--ux4g-primary);
+}
+
+.btn-primary:hover {
+    background: var(--ux4g-primary-dark);
+    border-color: var(--ux4g-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--ux4g-primary);
+    color: var(--ux4g-primary);
+}
+
+.btn-outline:hover {
+    background: var(--ux4g-primary);
+    color: white;
+}
+
+/* Cards - UX4G Style */
+.card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Government Footer */
+.gov-footer {
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+.gov-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0.8;
+}
+
+.gov-logos img {
+    height: 40px;
+    filter: grayscale(30%);
+    transition: var(--transition);
+}
+
+.gov-logos img:hover {
+    filter: grayscale(0%);
+}
+
+/* Form Inputs */
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    transition: var(--transition);
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--ux4g-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+/* Accessibility Skip Link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--ux4g-primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 4px;
+}

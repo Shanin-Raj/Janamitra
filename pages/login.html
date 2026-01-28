@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Janamithra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 50px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+            line-height: 1;
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 2;
+        }
+
+        .login-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 1.5rem 3rem;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .login-card .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .role-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .role-tab {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg-light);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .role-tab.active {
+            background: var(--ux4g-primary);
+            color: white;
+        }
+
+        .role-tab:hover:not(.active) {
+            background: #e9ecef;
+        }
+
+        #otp-section {
+            display: none;
+        }
+
+        .info-text {
+            background: #e8f4fd;
+            border-left: 4px solid var(--ux4g-info);
+            padding: 12px 16px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        #error-msg {
+            background: #fde8e8;
+            border-left: 4px solid var(--ux4g-danger);
+            padding: 12px 16px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            text-align: left;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--ux4g-danger);
+            display: none;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.5rem;
+            color: var(--ux4g-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="login-page">
+    <!-- Tricolor Strip -->
+    <div class="tricolor-strip"></div>
+
+    <!-- Header -->
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                    <span class="subtitle">Ministry of Panchayati Raj</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <main class="login-content">
+        <div class="login-card card animate-fade-in">
+            <h2 id="login-title">Welcome </h2>
+            <p class="subtitle">Login to access your Panchayat portal</p>
+
+            <div class="role-tabs">
+                <button class="role-tab active" onclick="setRole('citizen')"><i class="fas fa-user"></i>
+                    Citizen</button>
+                <button class="role-tab" onclick="setRole('admin')"><i class="fas fa-user-shield"></i> Admin</button>
+            </div>
+
+            <!-- EPIC Step -->
+            <div id="epic-section">
+                <div class="input-group">
+                    <label for="epic-number">Voter ID (EPIC) Number</label>
+                    <input type="text" id="epic-number" placeholder="Enter your 10-character EPIC" maxlength="10">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="sendOTP()">
+                    <i class="fas fa-paper-plane"></i> Verify & Send OTP
+                </button>
+            </div>
+
+            <!-- OTP Step -->
+            <div id="otp-section">
+                <div class="info-text">
+                    <i class="fas fa-info-circle"></i> A 6-digit OTP has been sent to your registered mobile number
+                    ending with **98.
+                </div>
+                <div class="input-group">
+                    <label for="otp">Enter One-Time Password</label>
+                    <input type="text" id="otp" placeholder="Enter 6-digit OTP" maxlength="6">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="verifyOTP()">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+                <a href="#" class="back-link" onclick="backToEpic(); return false;"><i class="fas fa-arrow-left"></i>
+                    Back to EPIC Entry</a>
+            </div>
+
+            <div id="error-msg"></div>
+        </div>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let currentRole = 'citizen';
+        let validatedEpicId = null;
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('role') === 'admin') {
+            currentRole = 'admin';
+            document.querySelectorAll('.role-tab')[1].classList.add('active');
+            document.querySelectorAll('.role-tab')[0].classList.remove('active');
+            document.querySelector('label[for="epic-number"]').innerText = 'Employee ID';
+        }
+
+        function setRole(role) {
+            currentRole = role;
+            document.querySelectorAll('.role-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.role-tab').classList.add('active');
+
+            const epicLabel = document.querySelector('label[for="epic-number"]');
+            epicLabel.innerText = role === 'admin' ? 'Employee ID' : 'Voter ID (EPIC) Number';
+        }
+
+        function sendOTP() {
+            const input = document.getElementById('epic-number').value.trim().toUpperCase();
+
+            if (input.length < 5) {
+                showError("Please enter a valid ID number (minimum 5 characters).");
+                return;
+            }
+
+            // Validate EPIC ID against database
+            if (currentRole === 'citizen') {
+                const panchayatId = getPanchayatByEpic(input);
+                if (!panchayatId) {
+                    showError("EPIC ID not found in our records. Please check and try again.");
+                    return;
+                }
+                validatedEpicId = input;
+
+                // Show masked phone number from citizen data
+                const citizen = getCitizenByEpic(input);
+                if (citizen) {
+                    const maskedPhone = citizen.phone.substring(citizen.phone.length - 2);
+                    document.querySelector('#otp-section .info-text').innerHTML =
+                        `<i class="fas fa-info-circle"></i> A 6-digit OTP has been sent to your registered mobile number ending with **${maskedPhone}.`;
+                }
+            } else {
+                // Admin login - simplified for demo
+                validatedEpicId = input;
+            }
+
+            document.getElementById('epic-section').style.display = 'none';
+            document.getElementById('otp-section').style.display = 'block';
+            hideError();
+        }
+
+        function backToEpic() {
+            document.getElementById('epic-section').style.display = 'block';
+            document.getElementById('otp-section').style.display = 'none';
+            validatedEpicId = null;
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('otp').value;
+
+            if (otp === '123456' || otp.length === 6) {
+                // Store session for both roles using the unified helper
+                // This ensures userData is correctly populated for both Citizens and Admins
+                const success = storeSession(validatedEpicId, currentRole);
+
+                if (success) {
+                    window.location.href = currentRole === 'admin' ? 'admin_dashboard.html' : 'dashboard.html';
+                } else {
+                    if (currentRole === 'admin') {
+                        showError("Invalid Employee ID or internal error. Try 'ADM001' (Athiyal) or 'ADM002' (Payyavoor).");
+                    } else {
+                        showError("Login failed. Data retrieval error.");
+                    }
+                }
+            } else {
+                showError("Invalid OTP. For testing, please use 123456.");
+            }
+        }
+
+        function showError(msg) {
+            const err = document.getElementById('error-msg');
+            err.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + msg;
+            err.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('error-msg').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

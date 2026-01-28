@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Janamithra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Header */
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 45px;
+        }
+
+        .logo-text .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--ux4g-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Page Content */
+        .dashboard {
+            padding-top: 100px;
+            padding-bottom: 3rem;
+        }
+
+        /* Hero Carousel */
+        .carousel-section {
+            margin-bottom: 3rem;
+        }
+
+        .carousel {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: var(--bg-white);
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+        }
+
+        .slide-content h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .slide-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            color: var(--ux4g-primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background: var(--ux4g-primary);
+            color: white;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .indicator.active {
+            background: var(--ux4g-primary);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* Action Cards */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .action-card {
+            padding: 2rem;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ux4g-primary);
+        }
+
+        .action-icon {
+            width: 65px;
+            height: 65px;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ux4g-primary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .action-card:hover .action-icon {
+            background: var(--ux4g-primary);
+            color: white;
+        }
+
+        .action-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .action-card p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .slide img {
+                height: 280px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Tricolor Strip -->
+    <div class="tricolor-strip"></div>
+
+    <!-- Header -->
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                    <span class="subtitle">Panchayat Dashboard</span>
+                </div>
+            </a>
+            <div class="user-menu">
+                <span>Welcome, <strong>S. Kumar</strong></span>
+                <div class="user-avatar">SK</div>
+                <a href="#" onclick="logout(); return false;" class="btn btn-outline" style="padding: 8px 12px;"><i
+                        class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard container animate-fade-in">
+
+        <!-- Hero Carousel -->
+        <section class="carousel-section">
+            <div class="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <div class="slide">
+                        <img src="../assets/hero_events.png" alt="Events">
+                        <div class="slide-content">
+                            <h2>Upcoming Gram Sabha</h2>
+                            <p>Join us on Jan 30th for the annual development planning meeting.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/hero_projects.png" alt="Projects">
+                        <div class="slide-content">
+                            <h2>Smart Road Initiative</h2>
+                            <p>Phase 2 of the Ward 5 road renovation is now 75% complete.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/hero_schemes.png" alt="Schemes">
+                        <div class="slide-content">
+                            <h2>Digital Literacy Scheme</h2>
+                            <p>Applications are open for the free digital skills workshop for youth.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/hero_agriculture.png" alt="Agriculture">
+                        <div class="slide-content">
+                            <h2>Modern Farming Subsidy</h2>
+                            <p>New subsidies available for solar-powered irrigation pumps.</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="../assets/hero_healthcare.png" alt="Healthcare">
+                        <div class="slide-content">
+                            <h2>Free Health Camp</h2>
+                            <p>Primary Health Center is organizing a specialized eye check-up camp.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-nav">
+                    <button class="nav-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators">
+                    <div class="indicator active" onclick="goToSlide(0)"></div>
+                    <div class="indicator" onclick="goToSlide(1)"></div>
+                    <div class="indicator" onclick="goToSlide(2)"></div>
+                    <div class="indicator" onclick="goToSlide(3)"></div>
+                    <div class="indicator" onclick="goToSlide(4)"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section>
+            <div class="section-header">
+                <h2>Explore Your Panchayat</h2>
+            </div>
+            <div class="card-grid">
+                <a href="hierarchy.html" class="action-card card">
+                    <div class="action-icon"><i class="fas fa-sitemap"></i></div>
+                    <h3>Leader Hierarchy</h3>
+                    <p>Learn about your President, Ward Members, and their responsibilities.</p>
+                </a>
+                <a href="projects.html" class="action-card card">
+                    <div class="action-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Ongoing Projects</h3>
+                    <p>Track infrastructure and welfare projects in real-time.</p>
+                </a>
+                <a href="schemes.html" class="action-card card">
+                    <div class="action-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>Govt Schemes</h3>
+                    <p>Discover benefits you are eligible for and apply online.</p>
+                </a>
+                <a href="rti_complaints.html" class="action-card card">
+                    <div class="action-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <h3>RTI & Complaints</h3>
+                    <p>File grievances or seek information for transparency.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const inner = document.getElementById('carousel-inner');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function updateSlider() {
+            inner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateSlider();
+        }
+
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+
+</html>

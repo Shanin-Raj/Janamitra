@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schemes | Janamithra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 45px;
+        }
+
+        .logo-text .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 4rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ux4g-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scheme Cards */
+        .scheme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .scheme-card {
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scheme-header {
+            background: linear-gradient(135deg, var(--ux4g-primary), var(--ux4g-primary-dark));
+            color: white;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .scheme-header .category {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            margin-bottom: 0.5rem;
+        }
+
+        .scheme-header h3 {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .scheme-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scheme-body p {
+            margin-bottom: 1.25rem;
+        }
+
+        .benefit-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .benefit-list li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefit-list li i {
+            color: var(--ux4g-success);
+            font-size: 0.85rem;
+        }
+
+        .scheme-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        /* Filter Section */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--bg-white);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--ux4g-primary);
+            color: white;
+            border-color: var(--ux4g-primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tricolor-strip"></div>
+
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                </div>
+            </a>
+            <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </header>
+
+    <main class="container page-content animate-fade-in">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a> <span>/</span> Government Schemes
+        </nav>
+
+        <div class="page-header">
+            <h1>Government Schemes</h1>
+            <p>Access financial aid, subsidies, and educational benefits directly.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all">All Schemes</button>
+        </div>
+
+        <!-- Scheme Cards -->
+        <div class="scheme-grid" id="schemeGrid">
+            <!-- Schemes will be loaded here dynamically -->
+        </div>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        /**
+         * Load and display schemes
+         */
+
+        const schemeGrid = document.getElementById('schemeGrid');
+        const filterBar = document.getElementById('filterBar');
+        let allSchemes = [];
+        let currentFilter = 'all';
+
+        // Category icon mapping
+        const categoryIcons = {
+            'Welfare': 'fa-heart',
+            'Housing': 'fa-home',
+            'Education': 'fa-graduation-cap',
+            'Agriculture': 'fa-seedling',
+            'Employment': 'fa-briefcase',
+            'Sports': 'fa-trophy',
+            'Finance': 'fa-piggy-bank',
+            'Fisheries': 'fa-fish',
+            'Healthcare': 'fa-hospital',
+            'Other': 'fa-list'
+        };
+
+        // Category color mapping
+        const categoryColors = {
+            'Welfare': 'linear-gradient(135deg, #ec4899, #be185d)',
+            'Housing': 'linear-gradient(135deg, #f59e0b, #d97706)',
+            'Education': 'linear-gradient(135deg, #0ea5e9, #0284c7)',
+            'Agriculture': 'linear-gradient(135deg, #22c55e, #16a34a)',
+            'Employment': 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
+            'Sports': 'linear-gradient(135deg, #f97316, #ea580c)',
+            'Finance': 'linear-gradient(135deg, #06b6d4, #0891b2)',
+            'Fisheries': 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+            'Healthcare': 'linear-gradient(135deg, #ec4899, #be185d)',
+            'Other': 'linear-gradient(135deg, #6b7280, #4b5563)'
+        };
+
+        function renderSchemeCard(scheme) {
+            const icon = categoryIcons[scheme.category] || 'fa-list';
+            const bgColor = categoryColors[scheme.category] || categoryColors['Other'];
+
+            return `
+                <div class="scheme-card card" data-category="${scheme.category}">
+                    <div class="scheme-header" style="background: ${bgColor};">
+                        <div class="category"><i class="fas ${icon}"></i> ${scheme.category}</div>
+                        <h3>${scheme.name}</h3>
+                    </div>
+                    <div class="scheme-body">
+                        <p>${scheme.description || 'A government scheme providing financial assistance and benefits to eligible citizens.'}</p>
+                        <ul class="benefit-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>Amount:</strong> ${scheme.amount}</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Ministry:</strong> ${scheme.ministry}</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Eligibility:</strong> ${scheme.eligibility.substring(0, 50)}${scheme.eligibility.length > 50 ? '...' : ''}</li>
+                        </ul>
+                        ${scheme.documents && scheme.documents.length > 0 ? `
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+                                <strong>Documents:</strong> ${scheme.documents.join(', ')}
+                            </p>
+                        ` : ''}
+                    </div>
+                    <div class="scheme-footer">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="viewSchemeDetails('${scheme.id}')">
+                            <i class="fas fa-file-alt"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadSchemes() {
+            const session = requireAuth();
+            if (!session) return;
+
+            const panchayatId = session.panchayatId;
+            const schemes = getSchemesByPanchayat(panchayatId);
+
+            allSchemes = schemes;
+
+            if (schemes.length === 0) {
+                schemeGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-inbox"></i>
+                        <h3>No Schemes Available</h3>
+                        <p>Your panchayat doesn't have any schemes available yet. Check back soon!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Populate filter buttons
+            const categories = ['all', ...new Set(schemes.map(s => s.category))];
+            filterBar.innerHTML = categories.map(cat => `
+                <button class="filter-btn ${cat === 'all' ? 'active' : ''}" data-filter="${cat}" onclick="filterSchemes('${cat}')">
+                    ${cat === 'all' ? 'All Schemes' : cat}
+                </button>
+            `).join('');
+
+            // Render all schemes initially
+            renderSchemes(schemes);
+        }
+
+        function renderSchemes(schemes) {
+            if (schemes.length === 0) {
+                schemeGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-filter"></i>
+                        <h3>No Schemes Found</h3>
+                        <p>Try selecting a different category.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            schemeGrid.innerHTML = schemes.map(scheme => renderSchemeCard(scheme)).join('');
+        }
+
+        window.filterSchemes = function(category) {
+            currentFilter = category;
+
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter and render schemes
+            if (category === 'all') {
+                renderSchemes(allSchemes);
+            } else {
+                const filtered = allSchemes.filter(s => s.category === category);
+                renderSchemes(filtered);
+            }
+        };
+
+        window.viewSchemeDetails = function(schemeId) {
+            const scheme = allSchemes.find(s => s.id === schemeId);
+            if (!scheme) return;
+
+            const details = `
+Scheme Name: ${scheme.name}
+
+Category: ${scheme.category}
+Ministry: ${scheme.ministry}
+
+Amount/Benefit: ${scheme.amount}
+
+Eligibility Criteria:
+${scheme.eligibility}
+
+${scheme.documents && scheme.documents.length > 0 ? `Required Documents:
+${scheme.documents.map(doc => '• ' + doc).join('\n')}` : ''}
+
+${scheme.description ? `\nDescription:
+${scheme.description}` : ''}
+
+For more information and to apply, please visit your panchayat office or contact your ward member.
+            `;
+
+            alert(details);
+        };
+
+        // Load schemes on page load
+        document.addEventListener('DOMContentLoaded', loadSchemes);
+    </script>
+</body>
+
+</html>

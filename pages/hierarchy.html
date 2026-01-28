@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hierarchy | Janamithra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 45px;
+        }
+
+        .logo-text .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 4rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ux4g-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* President Card */
+        .president-card {
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--ux4g-primary);
+        }
+
+        .leader-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 4px solid var(--ux4g-primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .leader-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .leader-info .role {
+            display: inline-block;
+            background: var(--ux4g-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .leader-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .leader-info .bio {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contact-info i {
+            color: var(--ux4g-primary);
+            margin-right: 6px;
+        }
+
+        /* Ward Members Grid */
+        .ward-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ward-section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--ux4g-primary);
+            border-radius: 2px;
+        }
+
+        .ward-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ward-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .ward-card .leader-img {
+            width: 70px;
+            height: 70px;
+            border-width: 3px;
+        }
+
+        .ward-card .role {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+        }
+
+        .ward-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ward-card .contact-info {
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .president-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tricolor-strip"></div>
+
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                </div>
+            </a>
+            <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </header>
+
+    <main class="container page-content animate-fade-in">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a> <span>/</span> Leadership Hierarchy
+        </nav>
+
+        <div class="page-header">
+            <h1>Leadership Hierarchy</h1>
+            <p>Meet the elected representatives of your Panchayat.</p>
+        </div>
+
+        <!-- President -->
+        <div class="president-card card">
+            <div class="leader-img">
+                <img src="https://ui-avatars.com/api/?name=Ramesh+Patel&background=6c5ce7&color=fff&size=200"
+                    alt="President">
+            </div>
+            <div class="leader-info">
+                <span class="role"><i class="fas fa-crown"></i> Panchayat President</span>
+                <h3>Ramesh Patel</h3>
+                <p class="bio">Leading the development of 12 wards with a focus on water sustainability and education
+                    initiatives.</p>
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +91 98765 43210</span>
+                    <span><i class="fas fa-envelope"></i> president@egram.gov.in</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ward Members -->
+        <section class="ward-section">
+            <h2>Ward Members</h2>
+            <div class="ward-grid">
+                <div class="ward-card card">
+                    <div class="leader-img">
+                        <img src="https://ui-avatars.com/api/?name=Anita+Devi&background=0984e3&color=fff" alt="Ward 1">
+                    </div>
+                    <div class="leader-info">
+                        <span class="role">Ward 01</span>
+                        <h4>Anita Devi</h4>
+                        <div class="contact-info"><i class="fas fa-phone"></i> +91 98765 00001</div>
+                    </div>
+                </div>
+                <div class="ward-card card">
+                    <div class="leader-img">
+                        <img src="https://ui-avatars.com/api/?name=Suresh+V&background=0984e3&color=fff" alt="Ward 2">
+                    </div>
+                    <div class="leader-info">
+                        <span class="role">Ward 02</span>
+                        <h4>Suresh V.</h4>
+                        <div class="contact-info"><i class="fas fa-phone"></i> +91 98765 00002</div>
+                    </div>
+                </div>
+                <div class="ward-card card">
+                    <div class="leader-img">
+                        <img src="https://ui-avatars.com/api/?name=Meena+Kumari&background=0984e3&color=fff"
+                            alt="Ward 3">
+                    </div>
+                    <div class="leader-info">
+                        <span class="role">Ward 03</span>
+                        <h4>Meena Kumari</h4>
+                        <div class="contact-info"><i class="fas fa-phone"></i> +91 98765 00003</div>
+                    </div>
+                </div>
+                <div class="ward-card card">
+                    <div class="leader-img">
+                        <img src="https://ui-avatars.com/api/?name=Vikram+Singh&background=0984e3&color=fff"
+                            alt="Ward 4">
+                    </div>
+                    <div class="leader-info">
+                        <span class="role">Ward 04</span>
+                        <h4>Vikram Singh</h4>
+                        <div class="contact-info"><i class="fas fa-phone"></i> +91 98765 00004</div>
+                    </div>
+                </div>
+        </section>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>

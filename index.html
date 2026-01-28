@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janamithra | Centralized Panchayat System - Government of India</title>
+    <meta name="description"
+        content="Janamithra is the official digital portal for Panchayat governance, providing citizens access to schemes, projects, and grievance redressal.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Header */
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .emblem {
+            height: 55px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .logo-text .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Hero */
+        .hero-section {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.75rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section h1 span {
+            color: var(--ux4g-primary);
+        }
+
+        .hero-section p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            margin-top: 3rem;
+            max-width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Features */
+        .features-section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--ux4g-primary-light), var(--ux4g-primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        /* Stats */
+        .stats-section {
+            background: var(--ux4g-primary);
+            padding: 3rem 0;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .stat-item .label {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: #1a1a2e;
+            color: #ccc;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--ux4g-primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .gov-partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid #333;
+            margin-top: 1.5rem;
+        }
+
+        .gov-partner-logos img {
+            height: 35px;
+            filter: brightness(0) invert(0.7);
+            transition: var(--transition);
+        }
+
+        .gov-partner-logos img:hover {
+            filter: brightness(0) invert(1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .logo-text .title {
+                font-size: 1.1rem;
+            }
+
+            .emblem {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Tricolor Strip -->
+    <div class="tricolor-strip"></div>
+
+    <!-- Government Header -->
+    <header class="gov-header">
+        <div class="container header-inner">
+            <div class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                    alt="Government of India Emblem" class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITHRA</span>
+                    <span class="subtitle">Ministry of Panchayati Raj</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a href="pages/login.html" class="btn btn-outline">Login</a>
+                <a href="pages/login.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section class="hero-section" id="main-content">
+        <div class="container animate-fade-in">
+            <h1>Transparency & Accountability <span>at Your Doorstep</span></h1>
+            <p>Empowering citizens through a centralized digital Panchayat system. Track progress, apply for schemes,
+                and ensure your voice is heard.</p>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" id="panchayat-search" placeholder="Search Panchayat by Name (e.g., Athiyal)"
+                        list="panchayat-list" onkeypress="handleEnter(event)">
+                    <button class="btn btn-primary" onclick="searchPanchayat()"><i class="fas fa-search"></i>
+                        Search</button>
+                    <datalist id="panchayat-list"></datalist>
+                </div>
+
+                <style>
+                    /* Search Styles */
+                    .search-section {
+                        margin-top: 2.5rem;
+                        position: relative;
+                        max-width: 700px;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    .search-box {
+                        display: flex;
+                        gap: 8px;
+                        background: white;
+                        padding: 6px 8px;
+                        border-radius: 50px;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                        border: 1px solid rgba(0, 0, 0, 0.05);
+                        transition: box-shadow 0.3s;
+                    }
+
+                    .search-box:focus-within {
+                        box-shadow: 0 15px 35px rgba(108, 92, 231, 0.15);
+                        border-color: var(--ux4g-primary-light);
+                    }
+
+                    .search-box input {
+                        flex: 1;
+                        border: none;
+                        padding: 12px 20px;
+                        font-size: 1rem;
+                        outline: none;
+                        background: transparent;
+                        width: 100%;
+                    }
+
+                    .search-box button {
+                        border-radius: 40px;
+                        padding: 12px 30px;
+                        font-weight: 600;
+                        white-space: nowrap;
+                    }
+
+                    /* Overview Card Styles */
+                    .overview-container {
+                        margin-top: 2rem;
+                        position: relative;
+                        z-index: 10;
+                        text-align: left;
+                        animation: slideUp 0.4s ease-out;
+                        display: none;
+                    }
+
+                    @keyframes slideUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .overview-card {
+                        background: white;
+                        padding: 2rem;
+                        border-radius: 16px;
+                        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+                        position: relative;
+                        border: 1px solid rgba(0, 0, 0, 0.05);
+                    }
+
+                    .close-btn {
+                        position: absolute;
+                        top: 15px;
+                        right: 20px;
+                        font-size: 1.5rem;
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        color: #94a3b8;
+                        transition: color 0.2s;
+                    }
+
+                    .close-btn:hover {
+                        color: #ef4444;
+                    }
+
+                    .overview-header {
+                        border-bottom: 2px solid #f1f5f9;
+                        padding-bottom: 1rem;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .overview-header h2 {
+                        font-size: 1.5rem;
+                        color: var(--text-dark);
+                        margin: 0;
+                    }
+
+                    .overview-header span {
+                        color: var(--text-muted);
+                        font-size: 0.9rem;
+                    }
+
+                    .overview-grid {
+                        display: grid;
+                        grid-template-columns: 1.2fr 0.8fr;
+                        gap: 2.5rem;
+                    }
+
+                    .info-block {
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .info-block label {
+                        font-size: 0.75rem;
+                        color: #64748b;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-weight: 700;
+                        display: block;
+                        margin-bottom: 5px;
+                    }
+
+                    .info-block h4 {
+                        font-size: 1.1rem;
+                        color: #1e293b;
+                        font-weight: 600;
+                    }
+
+                    #overview-members {
+                        list-style: none;
+                        max-height: 120px;
+                        overflow-y: auto;
+                        padding-right: 5px;
+                    }
+
+                    #overview-members::-webkit-scrollbar {
+                        width: 4px;
+                    }
+
+                    #overview-members::-webkit-scrollbar-thumb {
+                        background: #cbd5e1;
+                        border-radius: 4px;
+                    }
+
+                    #overview-members li {
+                        font-size: 0.9rem;
+                        color: #475569;
+                        padding: 6px 0;
+                        border-bottom: 1px dashed #e2e8f0;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    #overview-members li span.role {
+                        font-size: 0.75rem;
+                        background: #e0e7ff;
+                        color: var(--ux4g-primary);
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                    }
+
+                    /* Chart */
+                    .pie-chart-wrapper {
+                        text-align: center;
+                        background: #f8fafc;
+                        padding: 1.5rem;
+                        border-radius: 12px;
+                    }
+
+                    .pie-chart {
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 50%;
+                        margin: 0 auto;
+                        position: relative;
+                    }
+
+                    /* Inner circle for donut chart effect */
+                    .pie-chart::after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 70px;
+                        height: 70px;
+                        background: white;
+                        border-radius: 50%;
+                    }
+
+                    .chart-legend {
+                        display: flex;
+                        justify-content: center;
+                        gap: 12px;
+                        font-size: 0.75rem;
+                        margin-top: 15px;
+                        flex-wrap: wrap;
+                    }
+
+                    .legend-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        color: #475569;
+                    }
+
+                    .dot {
+                        width: 8px;
+                        height: 8px;
+                        border-radius: 50%;
+                    }
+
+                    .dot.completed {
+                        background: #10b981;
+                    }
+
+                    .dot.ongoing {
+                        background: #3b82f6;
+                    }
+
+                    .dot.planned {
+                        background: #cbd5e1;
+                    }
+
+                    /* Locked Actions */
+                    .overview-actions {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 1rem;
+                        margin-top: 2rem;
+                        border-top: 1px solid #f1f5f9;
+                        padding-top: 1.5rem;
+                    }
+
+                    .locked-action {
+                        background: white;
+                        padding: 12px;
+                        border-radius: 8px;
+                        text-align: center;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                        border: 1px solid #e2e8f0;
+                        color: #64748b;
+                        font-weight: 500;
+                        font-size: 0.95rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                    }
+
+                    .locked-action:hover {
+                        background: #f8fafc;
+                        border-color: var(--ux4g-primary);
+                        color: var(--ux4g-primary);
+                        transform: translateY(-2px);
+                    }
+
+                    .lock-icon {
+                        font-size: 0.8rem;
+                        color: #94a3b8;
+                    }
+
+                    @media (max-width: 768px) {
+                        .overview-grid {
+                            grid-template-columns: 1fr;
+                            gap: 1.5rem;
+                        }
+
+                        .pie-chart-wrapper {
+                            margin-top: 1rem;
+                        }
+                    }
+                </style>
+
+                <!-- Dynamic Overview Container -->
+                <div id="panchayat-overview" class="overview-container">
+                    <div class="overview-card">
+                        <button class="close-btn" onclick="closeOverview()">&times;</button>
+                        <div class="overview-header">
+                            <h2 id="overview-name">Panchayat Name</h2>
+                            <span id="overview-district">District Name</span>
+                        </div>
+
+                        <div class="overview-grid">
+                            <div class="overview-info">
+                                <div class="info-block">
+                                    <label><i class="fas fa-user-tie"></i> President</label>
+                                    <h4 id="overview-president">Name</h4>
+                                </div>
+                                <div class="info-block">
+                                    <label><i class="fas fa-users"></i> Ward Members</label>
+                                    <ul id="overview-members"></ul>
+                                </div>
+                            </div>
+
+                            <div class="overview-stats">
+                                <div class="pie-chart-wrapper">
+                                    <label
+                                        style="display:block; margin-bottom:12px; font-weight:600; font-size:0.85rem; color:#475569;">Project
+                                        Status</label>
+                                    <div class="pie-chart" id="overview-chart"></div>
+                                    <div class="chart-legend">
+                                        <div class="legend-item"><span class="dot completed"></span> Completed</div>
+                                        <div class="legend-item"><span class="dot ongoing"></span> Ongoing</div>
+                                        <div class="legend-item"><span class="dot planned"></span> Planned</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overview-actions">
+                            <div class="locked-action" onclick="promptLogin('Schemes')">
+                                <i class="fas fa-hand-holding-heart"></i> View Schemes <i
+                                    class="fas fa-lock lock-icon"></i>
+                            </div>
+                            <div class="locked-action" onclick="promptLogin('Complaints')">
+                                <i class="fas fa-exclamation-circle"></i> File Complaint <i
+                                    class="fas fa-lock lock-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <img src="assets/landing_bg.png" alt="Janamithra Digital Village" class="hero-image">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About the Janamithra Initiative</h2>
+                <p>A digital bridge between the Government and the grassroots.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Digital Governance</h3>
+                    <p>Access Panchayat services, leadership hierarchies, and contact information digitally.</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Real-time Tracking</h3>
+                    <p>Monitor ongoing projects and infrastructure development with live progress updates.</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3>Scheme Enrollment</h3>
+                    <p>Discover and apply for State and Central Government schemes directly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="value">2.5L+</div>
+                    <div class="label">Panchayats Registered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">1.2Cr</div>
+                    <div class="label">Citizens Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">₹500Cr</div>
+                    <div class="label">Schemes Disbursed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">98%</div>
+                    <div class="label">Grievances Resolved</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="pages/dashboard.html">Citizen Dashboard</a></li>
+                        <li><a href="pages/schemes.html">Government Schemes</a></li>
+                        <li><a href="pages/projects.html">Ongoing Projects</a></li>
+                        <li><a href="pages/rti_complaints.html">RTI & Grievances</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Website Policies</a></li>
+                        <li><a href="#">Accessibility Statement</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Help & Support</h4>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect With Us</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="gov-partner-logos">
+                <img src="C:\Dev\web\E-Gram\assets\image.png" alt="Digital India">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/NIC_logo.svg/200px-NIC_logo.svg.png"
+                    alt="NIC">
+                <img src="https://www.india.gov.in/sites/upload_files/npi/files/India-Gov-Logo.png" alt="Gov.in">
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Janamithra Portal | Ministry of Panchayati Raj, Government of India</span>
+                <span>Last Updated: 27 Jan 2026</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="js/database.js"></script>
+    <script>
+        // Populate Datalist with Panchayats
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof EGramDB !== 'undefined') {
+                const datalist = document.getElementById('panchayat-list');
+                const panchayats = Object.values(EGramDB.panchayats);
+                panchayats.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.name;
+                    datalist.appendChild(option);
+                });
+            }
+        });
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') searchPanchayat();
+        }
+
+        function searchPanchayat() {
+            const query = document.getElementById('panchayat-search').value.toLowerCase().trim();
+            if (!query) return;
+
+            // Find Panchayat
+            let found = null;
+            let foundId = null;
+
+            for (const [id, data] of Object.entries(EGramDB.panchayats)) {
+                if (data.name.toLowerCase().includes(query)) {
+                    found = data;
+                    foundId = id;
+                    break;
+                }
+            }
+
+            if (found) {
+                showOverview(foundId, found);
+            } else {
+                alert("Panchayat not found. Please try searching for 'Athiyal', 'Payyavoor', etc.");
+            }
+        }
+
+        function showOverview(id, data) {
+            const card = document.getElementById('panchayat-overview');
+
+            // Populate Data
+            document.getElementById('overview-name').textContent = data.name;
+            document.getElementById('overview-district').textContent = `${data.block}, ${data.district}`;
+            document.getElementById('overview-president').textContent = data.president.name;
+
+            // Members List (Show only 3-4 due to space)
+            const membersList = document.getElementById('overview-members');
+            membersList.innerHTML = '';
+            data.members.slice(0, 4).forEach(m => {
+                const li = document.createElement('li');
+                li.innerHTML = `${m.name} <span class="role">${m.portfolio}</span>`;
+                membersList.appendChild(li);
+            });
+            if (data.members.length > 4) {
+                const li = document.createElement('li');
+                li.innerHTML = `<span style="font-size:0.8rem; color:var(--ux4g-primary); cursor:pointer">View ${data.members.length - 4} more after login...</span>`;
+                li.style.border = 'none';
+                li.style.justifyContent = 'center';
+                membersList.appendChild(li);
+            }
+
+            // Chart Logic
+            const projects = EGramDB.projects[id] || [];
+            let completed = 0, ongoing = 0, planned = 0;
+
+            if (projects.length > 0) {
+                projects.forEach(p => {
+                    if (p.progress === 100) completed++;
+                    else if (p.status === 'ongoing') ongoing++;
+                    else planned++;
+                });
+            } else {
+                planned = 1; // Default to show empty
+            }
+
+            const total = completed + ongoing + planned;
+            const degCompleted = (completed / total) * 360;
+            const degOngoing = (ongoing / total) * 360;
+            const degPlanned = (planned / total) * 360;
+
+            const chart = document.getElementById('overview-chart');
+            // Conic Gradient: Green (Completed) -> Blue (Ongoing) -> Grey (Planned)
+            chart.style.background = `conic-gradient(
+                #10b981 0deg ${degCompleted}deg,
+                #3b82f6 ${degCompleted}deg ${degCompleted + degOngoing}deg,
+                #cbd5e1 ${degCompleted + degOngoing}deg 360deg
+            )`;
+
+            card.style.display = 'block';
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function closeOverview() {
+            document.getElementById('panchayat-overview').style.display = 'none';
+        }
+
+        function promptLogin(feature) {
+            const choice = confirm(`You need to login to view ${feature}. \n\nDo you want to proceed to the Login page?`);
+            if (choice) {
+                window.location.href = 'pages/login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>
