@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Schemes | Janamithra Admin</title>
+    <title>Manage Schemes | Janamitra Admin</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -261,6 +261,7 @@
                 transform: translateY(30px);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -271,6 +272,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -468,7 +470,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
                     class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                     <span class="subtitle">Admin Panel</span>
                 </div>
             </a>
@@ -488,7 +490,8 @@
             <ul class="sidebar-menu">
                 <li><a href="admin_dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
                 <li><a href="admin_manage_projects.html"><i class="fas fa-project-diagram"></i> Manage Projects</a></li>
-                <li><a href="admin_manage_schemes.html" class="active"><i class="fas fa-hand-holding-heart"></i> Manage Schemes</a></li>
+                <li><a href="admin_manage_schemes.html" class="active"><i class="fas fa-hand-holding-heart"></i> Manage
+                        Schemes</a></li>
                 <li><a href="#"><i class="fas fa-inbox"></i> Complaints</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
@@ -553,7 +556,8 @@
 
                 <div class="form-group form-row full">
                     <label for="schemeEligibility">Eligibility Criteria *</label>
-                    <textarea id="schemeEligibility" required placeholder="e.g., Age 60+, BPL, Indian citizen"></textarea>
+                    <textarea id="schemeEligibility" required
+                        placeholder="e.g., Age 60+, BPL, Indian citizen"></textarea>
                 </div>
 
                 <div class="form-group form-row full">
@@ -563,7 +567,8 @@
 
                 <div class="form-group form-row full">
                     <label for="schemePanchayats">Available in Panchayats *</label>
-                    <div id="panchayatCheckboxes" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
+                    <div id="panchayatCheckboxes"
+                        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem;">
                         <!-- Checkboxes will be populated here -->
                     </div>
                 </div>
@@ -571,7 +576,8 @@
                 <div class="form-group form-row full">
                     <label>Required Documents</label>
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <input type="text" id="documentInput" placeholder="Add document and press Enter" style="flex: 1;">
+                        <input type="text" id="documentInput" placeholder="Add document and press Enter"
+                            style="flex: 1;">
                     </div>
                     <div id="documentsContainer" class="tag-input-container"></div>
                 </div>
@@ -663,18 +669,18 @@
         // Populate panchayat checkboxes
         function populatePanchayatCheckboxes() {
             const container = document.getElementById('panchayatCheckboxes');
-            const panchayatIds = Object.keys(EGramDB.panchayats);
+            const panchayatIds = Object.keys(JanamitraDB.panchayats);
 
             container.innerHTML = panchayatIds.map(id => `
                 <label style="display: flex; align-items: center; gap: 0.5rem;">
                     <input type="checkbox" name="panchayat" value="${id}">
-                    <span>${EGramDB.panchayats[id].name}</span>
+                    <span>${JanamitraDB.panchayats[id].name}</span>
                 </label>
             `).join('');
         }
 
         // Open add scheme modal
-        addSchemeBtn.addEventListener('click', function() {
+        addSchemeBtn.addEventListener('click', function () {
             currentEditingSchemeId = null;
             modalTitle.textContent = 'Add New Scheme';
             schemeForm.reset();
@@ -696,14 +702,14 @@
         closeSchemeModalBtn.addEventListener('click', closeSchemeModalFunc);
         cancelSchemeBtn.addEventListener('click', closeSchemeModalFunc);
 
-        schemeModal.addEventListener('click', function(event) {
+        schemeModal.addEventListener('click', function (event) {
             if (event.target === schemeModal) {
                 closeSchemeModalFunc();
             }
         });
 
         // Add document tag
-        documentInput.addEventListener('keypress', function(event) {
+        documentInput.addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 const doc = this.value.trim();
@@ -726,13 +732,13 @@
         }
 
         // Remove document
-        window.removeDocument = function(index) {
+        window.removeDocument = function (index) {
             currentDocuments.splice(index, 1);
             renderDocumentTags();
         };
 
         // Edit scheme
-        window.editScheme = function(schemeId) {
+        window.editScheme = function (schemeId) {
             const schemes = getAllSchemes();
             const scheme = schemes.find(s => s.id === schemeId);
 
@@ -762,7 +768,7 @@
         };
 
         // Delete scheme
-        window.deleteSchemeConfirm = function(schemeId) {
+        window.deleteSchemeConfirm = function (schemeId) {
             if (confirm('Are you sure you want to delete this scheme?')) {
                 deleteScheme(schemeId);
                 saveToStorage();
@@ -771,7 +777,7 @@
         };
 
         // Handle form submission
-        schemeForm.addEventListener('submit', function(event) {
+        schemeForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const selectedPanchayats = Array.from(document.querySelectorAll('input[name="panchayat"]:checked'))

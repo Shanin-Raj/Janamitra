@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Complaints | Janamithra Admin</title>
+    <title>Manage Complaints | Janamitra Admin</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -295,6 +295,7 @@
                 transform: translateY(30px);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -305,6 +306,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -465,7 +467,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
                     class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                     <span class="subtitle">Admin Panel</span>
                 </div>
             </a>
@@ -485,8 +487,10 @@
             <ul class="sidebar-menu">
                 <li><a href="admin_dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
                 <li><a href="admin_manage_projects.html"><i class="fas fa-project-diagram"></i> Manage Projects</a></li>
-                <li><a href="admin_manage_schemes.html"><i class="fas fa-hand-holding-heart"></i> Manage Schemes</a></li>
-                <li><a href="admin_manage_complaints.html" class="active"><i class="fas fa-inbox"></i> Complaints</a></li>
+                <li><a href="admin_manage_schemes.html"><i class="fas fa-hand-holding-heart"></i> Manage Schemes</a>
+                </li>
+                <li><a href="admin_manage_complaints.html" class="active"><i class="fas fa-inbox"></i> Complaints</a>
+                </li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
         </aside>
@@ -678,7 +682,7 @@
             `;
         }
 
-        window.filterComplaints = function() {
+        window.filterComplaints = function () {
             const statusFilter = document.getElementById('statusFilter').value;
             const categoryFilter = document.getElementById('categoryFilter').value;
 
@@ -695,7 +699,7 @@
             renderComplaints(filtered);
         };
 
-        window.viewComplaint = function(complaintId) {
+        window.viewComplaint = function (complaintId) {
             const complaint = allComplaints.find(c => c.id === complaintId);
             if (!complaint) return;
 
@@ -762,13 +766,13 @@
 
         closeModalBtn.addEventListener('click', closeComplaintModal);
 
-        complaintModal.addEventListener('click', function(event) {
+        complaintModal.addEventListener('click', function (event) {
             if (event.target === complaintModal) {
                 closeComplaintModal();
             }
         });
 
-        updateStatusForm.addEventListener('submit', function(event) {
+        updateStatusForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const updateData = {

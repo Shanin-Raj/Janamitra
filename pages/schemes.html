@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schemes | Janamithra</title>
+    <title>Schemes | Janamitra</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -189,7 +189,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
                     class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                 </div>
             </a>
             <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
@@ -337,7 +337,7 @@
             schemeGrid.innerHTML = schemes.map(scheme => renderSchemeCard(scheme)).join('');
         }
 
-        window.filterSchemes = function(category) {
+        window.filterSchemes = function (category) {
             currentFilter = category;
 
             // Update active button
@@ -357,7 +357,7 @@
             }
         };
 
-        window.viewSchemeDetails = function(schemeId) {
+        window.viewSchemeDetails = function (schemeId) {
             const scheme = allSchemes.find(s => s.id === schemeId);
             if (!scheme) return;
 

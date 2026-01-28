@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janamithra | Centralized Panchayat System - Government of India</title>
+    <title>Janamitra | Centralized Panchayat System - Government of India</title>
     <meta name="description"
-        content="Janamithra is the official digital portal for Panchayat governance, providing citizens access to schemes, projects, and grievance redressal.">
+        content="Janamitra is the official digital portal for Panchayat governance, providing citizens access to schemes, projects, and grievance redressal.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -257,6 +257,127 @@
                 height: 40px;
             }
         }
+
+        /* Search Result Modal Enhancements */
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-action-card {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .modal-action-card:hover {
+            border-color: var(--ux4g-primary);
+            background: #f3f0ff;
+        }
+
+        .modal-action-card i {
+            font-size: 1.5rem;
+            color: var(--ux4g-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-action-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: var(--text-dark);
+        }
+
+        .modal-action-card.locked {
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .modal-action-card.locked i {
+            color: var(--text-muted);
+        }
+
+        .modal-action-card.locked::after {
+            content: '\f023';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        #overview-content {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            min-height: 200px;
+        }
+
+        #overview-content h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--ux4g-primary);
+            border-bottom: 1px solid var(--bg-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .member-list-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .member-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--ux4g-primary);
+        }
+
+        .project-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .project-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-status {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #e0e7ff;
+            color: var(--ux4g-primary);
+        }
     </style>
 </head>
 
@@ -274,7 +395,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
                     alt="Government of India Emblem" class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                     <span class="subtitle">Ministry of Panchayati Raj</span>
                 </div>
             </div>
@@ -581,59 +702,181 @@
                             margin-top: 1rem;
                         }
                     }
+
+                    /* Search Result Modal Enhancements */
+                    .modal-grid {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1rem;
+                        margin-top: 1.5rem;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    .modal-action-card {
+                        background: var(--bg-light);
+                        padding: 1rem;
+                        border-radius: var(--radius);
+                        text-align: center;
+                        cursor: pointer;
+                        border: 1px solid transparent;
+                        transition: var(--transition);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        min-height: 120px;
+                        text-decoration: none;
+                    }
+
+                    .modal-action-card:hover {
+                        border-color: var(--ux4g-primary);
+                        background: #f3f0ff;
+                    }
+
+                    .modal-action-card i {
+                        font-size: 1.5rem;
+                        color: var(--ux4g-primary);
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .modal-action-card h4 {
+                        font-size: 0.95rem;
+                        margin-bottom: 0;
+                        color: var(--text-dark);
+                    }
+
+                    .modal-action-card.locked {
+                        opacity: 0.7;
+                        position: relative;
+                    }
+
+                    .modal-action-card.locked i {
+                        color: var(--text-muted);
+                    }
+
+                    .modal-action-card.locked::after {
+                        content: '\f023';
+                        font-family: "Font Awesome 6 Free";
+                        font-weight: 900;
+                        position: absolute;
+                        top: 8px;
+                        right: 8px;
+                        color: var(--text-muted);
+                        font-size: 0.8rem;
+                    }
+
+                    #overview-content {
+                        background: white;
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--radius);
+                        padding: 1.5rem;
+                        min-height: 200px;
+                    }
+
+                    #overview-content h4 {
+                        margin-top: 0;
+                        margin-bottom: 1rem;
+                        color: var(--ux4g-primary);
+                        border-bottom: 1px solid var(--bg-light);
+                        padding-bottom: 0.5rem;
+                    }
+
+                    .member-list-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        padding: 0.75rem;
+                        border-bottom: 1px solid var(--bg-light);
+                    }
+
+                    .member-list-item:last-child {
+                        border-bottom: none;
+                    }
+
+                    .member-avatar {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        background: var(--bg-light);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: bold;
+                        color: var(--ux4g-primary);
+                    }
+
+                    .project-list-item {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 0.75rem;
+                        border-bottom: 1px solid var(--bg-light);
+                    }
+
+                    .project-list-item:last-child {
+                        border-bottom: none;
+                    }
+
+                    .project-status {
+                        font-size: 0.8rem;
+                        padding: 2px 8px;
+                        border-radius: 12px;
+                        background: #e0e7ff;
+                        color: var(--ux4g-primary);
+                    }
                 </style>
 
                 <!-- Dynamic Overview Container -->
-                <div id="panchayat-overview" class="overview-container">
-                    <div class="overview-card">
-                        <button class="close-btn" onclick="closeOverview()">&times;</button>
-                        <div class="overview-header">
-                            <h2 id="overview-name">Panchayat Name</h2>
-                            <span id="overview-district">District Name</span>
+                <!-- Dynamic Overview Container -->
+                <div id="panchayat-overview" class="overview-container overview-card" style="display: none;">
+                    <div class="result-header">
+                        <div>
+                            <h3 id="overview-name">Panchayat Name</h3>
+                            <p id="overview-district" style="color: var(--text-muted); font-size: 0.9rem;">District,
+                                State</p>
                         </div>
+                        <button onclick="closeOverview()"
+                            style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    </div>
 
-                        <div class="overview-grid">
-                            <div class="overview-info">
-                                <div class="info-block">
-                                    <label><i class="fas fa-user-tie"></i> President</label>
-                                    <h4 id="overview-president">Name</h4>
-                                </div>
-                                <div class="info-block">
-                                    <label><i class="fas fa-users"></i> Ward Members</label>
-                                    <ul id="overview-members"></ul>
-                                </div>
-                            </div>
+                    <div class="president-info"
+                        style="margin-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <span class="label"
+                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">President</span>
+                        <div style="font-weight: 600; font-size: 1.1rem;" id="overview-president">President Name</div>
+                    </div>
 
-                            <div class="overview-stats">
-                                <div class="pie-chart-wrapper">
-                                    <label
-                                        style="display:block; margin-bottom:12px; font-weight:600; font-size:0.85rem; color:#475569;">Project
-                                        Status</label>
-                                    <div class="pie-chart" id="overview-chart"></div>
-                                    <div class="chart-legend">
-                                        <div class="legend-item"><span class="dot completed"></span> Completed</div>
-                                        <div class="legend-item"><span class="dot ongoing"></span> Ongoing</div>
-                                        <div class="legend-item"><span class="dot planned"></span> Planned</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="modal-grid">
+                        <a href="pages/hierarchy.html" class="modal-action-card">
+                            <i class="fas fa-users"></i>
+                            <h4>Hierarchy</h4>
+                        </a>
+                        <a href="pages/projects.html" class="modal-action-card">
+                            <i class="fas fa-project-diagram"></i>
+                            <h4>Projects</h4>
+                        </a>
+                        <div class="modal-action-card locked" onclick="promptLogin('Schemes')">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h4>Schemes</h4>
                         </div>
+                        <div class="modal-action-card locked" onclick="promptLogin('Complaints')">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Complaints</h4>
+                        </div>
+                    </div>
 
-                        <div class="overview-actions">
-                            <div class="locked-action" onclick="promptLogin('Schemes')">
-                                <i class="fas fa-hand-holding-heart"></i> View Schemes <i
-                                    class="fas fa-lock lock-icon"></i>
-                            </div>
-                            <div class="locked-action" onclick="promptLogin('Complaints')">
-                                <i class="fas fa-exclamation-circle"></i> File Complaint <i
-                                    class="fas fa-lock lock-icon"></i>
-                            </div>
+                    <div id="overview-content">
+                        <!-- Dynamic Content Loaded Here -->
+                        <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                            <i class="fas fa-info-circle"
+                                style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                            Select an option above to view details
                         </div>
                     </div>
                 </div>
             </div>
 
-            <img src="assets/landing_bg.png" alt="Janamithra Digital Village" class="hero-image">
+            <img src="assets/landing_bg.png" alt="Janamitra Digital Village" class="hero-image">
         </div>
     </section>
 
@@ -641,7 +884,7 @@
     <section class="features-section">
         <div class="container">
             <div class="section-header">
-                <h2>About the Janamithra Initiative</h2>
+                <h2>About the Janamitra Initiative</h2>
                 <p>A digital bridge between the Government and the grassroots.</p>
             </div>
             <div class="feature-grid">
@@ -730,14 +973,14 @@
             </div>
 
             <div class="gov-partner-logos">
-                <img src="C:\Dev\web\E-Gram\assets\image.png" alt="Digital India">
+                <img src="assets/image.png" alt="Digital India">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/NIC_logo.svg/200px-NIC_logo.svg.png"
                     alt="NIC">
                 <img src="https://www.india.gov.in/sites/upload_files/npi/files/India-Gov-Logo.png" alt="Gov.in">
             </div>
 
             <div class="footer-bottom">
-                <span>© 2026 Janamithra Portal | Ministry of Panchayati Raj, Government of India</span>
+                <span>© 2026 Janamitra Portal | Ministry of Panchayati Raj, Government of India</span>
                 <span>Last Updated: 27 Jan 2026</span>
             </div>
         </div>
@@ -747,9 +990,9 @@
     <script>
         // Populate Datalist with Panchayats
         document.addEventListener('DOMContentLoaded', () => {
-            if (typeof EGramDB !== 'undefined') {
+            if (typeof JanamitraDB !== 'undefined') {
                 const datalist = document.getElementById('panchayat-list');
-                const panchayats = Object.values(EGramDB.panchayats);
+                const panchayats = Object.values(JanamitraDB.panchayats);
                 panchayats.forEach(p => {
                     const option = document.createElement('option');
                     option.value = p.name;
@@ -770,7 +1013,7 @@
             let found = null;
             let foundId = null;
 
-            for (const [id, data] of Object.entries(EGramDB.panchayats)) {
+            for (const [id, data] of Object.entries(JanamitraDB.panchayats)) {
                 if (data.name.toLowerCase().includes(query)) {
                     found = data;
                     foundId = id;
@@ -785,7 +1028,13 @@
             }
         }
 
+        let currentPanchayatId = null;
+        let currentPanchayatData = null;
+
         function showOverview(id, data) {
+            currentPanchayatId = id;
+            currentPanchayatData = data;
+
             const card = document.getElementById('panchayat-overview');
 
             // Populate Data
@@ -793,51 +1042,86 @@
             document.getElementById('overview-district').textContent = `${data.block}, ${data.district}`;
             document.getElementById('overview-president').textContent = data.president.name;
 
-            // Members List (Show only 3-4 due to space)
-            const membersList = document.getElementById('overview-members');
-            membersList.innerHTML = '';
-            data.members.slice(0, 4).forEach(m => {
-                const li = document.createElement('li');
-                li.innerHTML = `${m.name} <span class="role">${m.portfolio}</span>`;
-                membersList.appendChild(li);
-            });
-            if (data.members.length > 4) {
-                const li = document.createElement('li');
-                li.innerHTML = `<span style="font-size:0.8rem; color:var(--ux4g-primary); cursor:pointer">View ${data.members.length - 4} more after login...</span>`;
-                li.style.border = 'none';
-                li.style.justifyContent = 'center';
-                membersList.appendChild(li);
-            }
+            // Clear previous content
+            document.getElementById('overview-content').innerHTML = `
+                <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                    <i class="fas fa-arrow-up" style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                    Select an option from the menu above
+                </div>
+            `;
 
-            // Chart Logic
-            const projects = EGramDB.projects[id] || [];
-            let completed = 0, ongoing = 0, planned = 0;
-
-            if (projects.length > 0) {
-                projects.forEach(p => {
-                    if (p.progress === 100) completed++;
-                    else if (p.status === 'ongoing') ongoing++;
-                    else planned++;
-                });
-            } else {
-                planned = 1; // Default to show empty
-            }
-
-            const total = completed + ongoing + planned;
-            const degCompleted = (completed / total) * 360;
-            const degOngoing = (ongoing / total) * 360;
-            const degPlanned = (planned / total) * 360;
-
-            const chart = document.getElementById('overview-chart');
-            // Conic Gradient: Green (Completed) -> Blue (Ongoing) -> Grey (Planned)
-            chart.style.background = `conic-gradient(
-                #10b981 0deg ${degCompleted}deg,
-                #3b82f6 ${degCompleted}deg ${degCompleted + degOngoing}deg,
-                #cbd5e1 ${degCompleted + degOngoing}deg 360deg
-            )`;
+            // Default to Hierarchy view often looks good
+            loadContent('hierarchy');
 
             card.style.display = 'block';
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function loadContent(type) {
+            const contentDiv = document.getElementById('overview-content');
+
+            if (type === 'hierarchy') {
+                const members = currentPanchayatData.members;
+                let html = `<h4><i class="fas fa-users"></i> Ward Members</h4><div class="list-container">`;
+
+                members.forEach(m => {
+                    const initials = m.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+                    html += `
+                        <div class="member-list-item">
+                            <div class="member-avatar">${initials}</div>
+                            <div>
+                                <div style="font-weight: 600;">${m.name}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">${m.portfolio}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+                contentDiv.innerHTML = html;
+            } else if (type === 'projects') {
+                const projects = JanamitraDB.projects[currentPanchayatId] || [];
+                let html = `<h4><i class="fas fa-project-diagram"></i> Project Status</h4>`;
+
+                if (projects.length === 0) {
+                    html += `<div style="text-align:center; padding:1rem; color:var(--text-muted)">No projects found.</div>`;
+                } else {
+                    html += `<div class="list-container">`;
+                    projects.forEach(p => {
+                        html += `
+                            <div class="project-list-item">
+                                <div>
+                                    <div style="font-weight: 600;">${p.name}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Budget: ₹${p.budget_lakhs}L</div>
+                                </div>
+                                <span class="project-status">${p.status}</span>
+                            </div>
+                        `;
+                    });
+
+                    // Add Summary Chart
+                    let completed = projects.filter(p => p.progress === 100).length;
+                    let ongoing = projects.filter(p => p.status === 'ongoing' && p.progress < 100).length;
+
+                    html += `
+                        <div style="margin-top: 1rem; border-top: 1px solid var(--bg-light); padding-top: 1rem; display: flex; gap: 1rem; align-items: center;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">Completion Rate</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: var(--ux4g-primary);">
+                                    ${Math.round((completed / projects.length) * 100) || 0}%
+                                </div>
+                            </div>
+                            <div style="font-size: 0.8rem; text-align: right;">
+                                <div><span style="color:#10b981">●</span> Completed: ${completed}</div>
+                                <div><span style="color:#3b82f6">●</span> Ongoing: ${ongoing}</div>
+                            </div>
+                        </div>
+                    `;
+
+                    html += '</div>';
+                }
+                contentDiv.innerHTML = html;
+            }
         }
 
         function closeOverview() {

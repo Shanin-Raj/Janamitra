@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Janamithra</title>
+    <title>Projects | Janamitra</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -313,16 +313,16 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
                     class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                 </div>
             </a>
-            <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+            <a href="../index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
         </div>
     </header>
 
     <main class="container page-content animate-fade-in">
         <nav class="breadcrumb">
-            <a href="dashboard.html">Dashboard</a> <span>/</span> Panchayat Projects
+            <a href="../index.html">Home</a> <span>/</span> Panchayat Projects
         </nav>
 
         <div class="page-header">
@@ -445,10 +445,9 @@
         }
 
         function loadProjects() {
-            const session = requireAuth();
-            if (!session) return;
-
-            const panchayatId = session.panchayatId;
+            // Try session first, fallback to default panchayat for public viewing
+            const session = getSession();
+            const panchayatId = session?.panchayatId || 'P001';
             const projects = getProjectsByPanchayat(panchayatId);
 
             if (projects.length === 0) {
@@ -465,7 +464,7 @@
             projectsContainer.innerHTML = projects.map(project => renderProjectCard(project)).join('');
         }
 
-        window.submitComment = function(projectId, citizenName) {
+        window.submitComment = function (projectId, citizenName) {
             const textarea = document.getElementById(`comment-${projectId}`);
             const commentText = textarea.value.trim();
 
@@ -476,16 +475,16 @@
 
             addProjectComment(projectId, citizenName, commentText);
             saveToStorage();
-            
+
             textarea.value = '';
             loadProjects();
         };
 
-        window.clearComment = function(projectId) {
+        window.clearComment = function (projectId) {
             document.getElementById(`comment-${projectId}`).value = '';
         };
 
-        window.deleteComment = function(projectId, commentId) {
+        window.deleteComment = function (projectId, commentId) {
             if (confirm('Are you sure you want to delete this comment?')) {
                 deleteProjectComment(projectId, commentId);
                 saveToStorage();

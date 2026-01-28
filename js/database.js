@@ -1,9 +1,9 @@
 /**
- * Janamithra Database
+ * Janamitra Database
  * Maps EPIC IDs to Panchayats and stores all related data
  */
 
-const EGramDB = {
+const JanamitraDB = {
     // EPIC ID to Panchayat mapping
     epic_map: {
         "KLF9034101": "P001", "KLF9034102": "P001", "KLF9034103": "P001", "KLF9034104": "P001", "KLF9034105": "P001", "KLF9034106": "P001",
@@ -218,6 +218,27 @@ const EGramDB = {
         }
     },
 
+    // Sample member statistics (used for all members to demonstrate the feature)
+    member_stats: {
+        fund_utilization: 87,
+        projects_completed: 12,
+        projects_ongoing: 3,
+        beneficiaries_served: 2450,
+        achievements: [
+            "Completed ward road asphalting ahead of schedule",
+            "Installed 25 solar street lights under KSEB scheme",
+            "Facilitated 150+ pension applications",
+            "Organized 8 health camps benefiting 800+ citizens"
+        ],
+        budget_allocated_lakhs: 45,
+        budget_utilized_lakhs: 39.15,
+        attendance_rate: 92,
+        meetings_attended: 46,
+        total_meetings: 50,
+        citizen_feedback_score: 4.2,
+        last_updated: "2026-01-15"
+    },
+
     // Projects by Panchayat
     projects: {
         "P001": [
@@ -332,7 +353,7 @@ const EGramDB = {
  * @returns {string|null} Panchayat ID or null if invalid
  */
 function getPanchayatByEpic(epicId) {
-    return EGramDB.epic_map[epicId.toUpperCase()] || null;
+    return JanamitraDB.epic_map[epicId.toUpperCase()] || null;
 }
 
 /**
@@ -341,7 +362,7 @@ function getPanchayatByEpic(epicId) {
  * @returns {object|null} Citizen data or null
  */
 function getCitizenByEpic(epicId) {
-    return EGramDB.citizens[epicId.toUpperCase()] || null;
+    return JanamitraDB.citizens[epicId.toUpperCase()] || null;
 }
 
 /**
@@ -350,7 +371,7 @@ function getCitizenByEpic(epicId) {
  * @returns {object|null} Panchayat data or null
  */
 function getPanchayatDetails(panchayatId) {
-    return EGramDB.panchayats[panchayatId] || null;
+    return JanamitraDB.panchayats[panchayatId] || null;
 }
 
 /**
@@ -359,7 +380,7 @@ function getPanchayatDetails(panchayatId) {
  * @returns {array} Array of projects
  */
 function getProjectsByPanchayat(panchayatId) {
-    return EGramDB.projects[panchayatId] || [];
+    return JanamitraDB.projects[panchayatId] || [];
 }
 
 /**
@@ -368,7 +389,7 @@ function getProjectsByPanchayat(panchayatId) {
  * @returns {array} Array of available schemes
  */
 function getSchemesByPanchayat(panchayatId) {
-    return EGramDB.schemes.filter(scheme => scheme.panchayats.includes(panchayatId));
+    return JanamitraDB.schemes.filter(scheme => scheme.panchayats.includes(panchayatId));
 }
 
 /**
@@ -377,7 +398,7 @@ function getSchemesByPanchayat(panchayatId) {
  * @returns {array} Array of RTI/Complaints
  */
 function getRTIComplaintsByPanchayat(panchayatId) {
-    return EGramDB.rti_complaints[panchayatId] || [];
+    return JanamitraDB.rti_complaints[panchayatId] || [];
 }
 
 /**
@@ -388,7 +409,7 @@ function getRTIComplaintsByPanchayat(panchayatId) {
 function getRTIComplaintsByCitizen(epicId) {
     const panchayatId = getPanchayatByEpic(epicId);
     if (!panchayatId) return [];
-    const all = EGramDB.rti_complaints[panchayatId] || [];
+    const all = JanamitraDB.rti_complaints[panchayatId] || [];
     return all.filter(item => item.filed_by === epicId.toUpperCase());
 }
 
@@ -419,7 +440,7 @@ function loginWithEpic(epicId) {
  */
 function loginWithAdminId(adminId) {
     const adminReq = adminId.toUpperCase();
-    const adminData = EGramDB.admins[adminReq];
+    const adminData = JanamitraDB.admins[adminReq];
     if (!adminData) return null;
 
     // Superadmin check
@@ -450,10 +471,10 @@ function loginWithAdminId(adminId) {
  * @returns {object} The created project with ID
  */
 function addNewProject(panchayatId, projectData) {
-    if (!EGramDB.projects[panchayatId]) {
-        EGramDB.projects[panchayatId] = [];
+    if (!JanamitraDB.projects[panchayatId]) {
+        JanamitraDB.projects[panchayatId] = [];
     }
-    
+
     // Ensure required fields
     const project = {
         id: projectData.id || generateProjectId(panchayatId),
@@ -467,8 +488,8 @@ function addNewProject(panchayatId, projectData) {
         status: projectData.status || 'ongoing',
         created_date: projectData.created_date || new Date().toISOString().split('T')[0]
     };
-    
-    EGramDB.projects[panchayatId].push(project);
+
+    JanamitraDB.projects[panchayatId].push(project);
     return project;
 }
 
@@ -478,7 +499,7 @@ function addNewProject(panchayatId, projectData) {
  * @returns {string} Generated project ID
  */
 function generateProjectId(panchayatId) {
-    const existingProjects = EGramDB.projects[panchayatId] || [];
+    const existingProjects = JanamitraDB.projects[panchayatId] || [];
     const count = existingProjects.length + 1;
     return `PRJ${panchayatId}${String(count).padStart(3, '0')}`;
 }
@@ -491,12 +512,12 @@ function generateProjectId(panchayatId) {
  * @returns {object|null} Updated project or null if not found
  */
 function updateProject(panchayatId, projectId, updatedData) {
-    const projects = EGramDB.projects[panchayatId];
+    const projects = JanamitraDB.projects[panchayatId];
     if (!projects) return null;
-    
+
     const projectIndex = projects.findIndex(p => p.id === projectId);
     if (projectIndex === -1) return null;
-    
+
     projects[projectIndex] = { ...projects[projectIndex], ...updatedData };
     return projects[projectIndex];
 }
@@ -508,12 +529,12 @@ function updateProject(panchayatId, projectId, updatedData) {
  * @returns {boolean} True if deleted, false if not found
  */
 function deleteProject(panchayatId, projectId) {
-    const projects = EGramDB.projects[panchayatId];
+    const projects = JanamitraDB.projects[panchayatId];
     if (!projects) return false;
-    
+
     const projectIndex = projects.findIndex(p => p.id === projectId);
     if (projectIndex === -1) return false;
-    
+
     projects.splice(projectIndex, 1);
     return true;
 }
@@ -536,8 +557,8 @@ function addNewScheme(schemeData) {
         description: schemeData.description || "",
         created_date: schemeData.created_date || new Date().toISOString().split('T')[0]
     };
-    
-    EGramDB.schemes.push(scheme);
+
+    JanamitraDB.schemes.push(scheme);
     return scheme;
 }
 
@@ -546,7 +567,7 @@ function addNewScheme(schemeData) {
  * @returns {string} Generated scheme ID
  */
 function generateSchemeId() {
-    const count = EGramDB.schemes.length + 1;
+    const count = JanamitraDB.schemes.length + 1;
     return `SCH${String(count).padStart(3, '0')}`;
 }
 
@@ -557,11 +578,11 @@ function generateSchemeId() {
  * @returns {object|null} Updated scheme or null if not found
  */
 function updateScheme(schemeId, updatedData) {
-    const schemeIndex = EGramDB.schemes.findIndex(s => s.id === schemeId);
+    const schemeIndex = JanamitraDB.schemes.findIndex(s => s.id === schemeId);
     if (schemeIndex === -1) return null;
-    
-    EGramDB.schemes[schemeIndex] = { ...EGramDB.schemes[schemeIndex], ...updatedData };
-    return EGramDB.schemes[schemeIndex];
+
+    JanamitraDB.schemes[schemeIndex] = { ...JanamitraDB.schemes[schemeIndex], ...updatedData };
+    return JanamitraDB.schemes[schemeIndex];
 }
 
 /**
@@ -570,10 +591,10 @@ function updateScheme(schemeId, updatedData) {
  * @returns {boolean} True if deleted, false if not found
  */
 function deleteScheme(schemeId) {
-    const schemeIndex = EGramDB.schemes.findIndex(s => s.id === schemeId);
+    const schemeIndex = JanamitraDB.schemes.findIndex(s => s.id === schemeId);
     if (schemeIndex === -1) return false;
-    
-    EGramDB.schemes.splice(schemeIndex, 1);
+
+    JanamitraDB.schemes.splice(schemeIndex, 1);
     return true;
 }
 
@@ -582,15 +603,15 @@ function deleteScheme(schemeId) {
  * @returns {array} Array of all schemes
  */
 function getAllSchemes() {
-    return EGramDB.schemes;
+    return JanamitraDB.schemes;
 }
 
 /**
  * Initialize comments storage if not exists
  */
 function initializeComments() {
-    if (!EGramDB.project_comments) {
-        EGramDB.project_comments = {};
+    if (!JanamitraDB.project_comments) {
+        JanamitraDB.project_comments = {};
     }
 }
 
@@ -603,11 +624,11 @@ function initializeComments() {
  */
 function addProjectComment(projectId, citizenName, commentText) {
     initializeComments();
-    
-    if (!EGramDB.project_comments[projectId]) {
-        EGramDB.project_comments[projectId] = [];
+
+    if (!JanamitraDB.project_comments[projectId]) {
+        JanamitraDB.project_comments[projectId] = [];
     }
-    
+
     const comment = {
         id: `CMT${projectId}${Date.now()}`,
         author: citizenName,
@@ -615,8 +636,8 @@ function addProjectComment(projectId, citizenName, commentText) {
         date: new Date().toISOString().split('T')[0],
         time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
     };
-    
-    EGramDB.project_comments[projectId].push(comment);
+
+    JanamitraDB.project_comments[projectId].push(comment);
     return comment;
 }
 
@@ -627,7 +648,7 @@ function addProjectComment(projectId, citizenName, commentText) {
  */
 function getProjectComments(projectId) {
     initializeComments();
-    return EGramDB.project_comments[projectId] || [];
+    return JanamitraDB.project_comments[projectId] || [];
 }
 
 /**
@@ -638,13 +659,13 @@ function getProjectComments(projectId) {
  */
 function deleteProjectComment(projectId, commentId) {
     initializeComments();
-    
-    if (!EGramDB.project_comments[projectId]) return false;
-    
-    const commentIndex = EGramDB.project_comments[projectId].findIndex(c => c.id === commentId);
+
+    if (!JanamitraDB.project_comments[projectId]) return false;
+
+    const commentIndex = JanamitraDB.project_comments[projectId].findIndex(c => c.id === commentId);
     if (commentIndex === -1) return false;
-    
-    EGramDB.project_comments[projectId].splice(commentIndex, 1);
+
+    JanamitraDB.project_comments[projectId].splice(commentIndex, 1);
     return true;
 }
 
@@ -657,10 +678,10 @@ function deleteProjectComment(projectId, commentId) {
  * @returns {object} The created complaint
  */
 function addComplaint(panchayatId, citizenName, epicId, complaintData) {
-    if (!EGramDB.rti_complaints[panchayatId]) {
-        EGramDB.rti_complaints[panchayatId] = [];
+    if (!JanamitraDB.rti_complaints[panchayatId]) {
+        JanamitraDB.rti_complaints[panchayatId] = [];
     }
-    
+
     const complaint = {
         id: generateComplaintId(panchayatId),
         type: 'Complaint',
@@ -675,8 +696,8 @@ function addComplaint(panchayatId, citizenName, epicId, complaintData) {
         response: null,
         resolved_date: null
     };
-    
-    EGramDB.rti_complaints[panchayatId].push(complaint);
+
+    JanamitraDB.rti_complaints[panchayatId].push(complaint);
     return complaint;
 }
 
@@ -686,7 +707,7 @@ function addComplaint(panchayatId, citizenName, epicId, complaintData) {
  * @returns {string} Generated complaint ID
  */
 function generateComplaintId(panchayatId) {
-    const complaints = EGramDB.rti_complaints[panchayatId] || [];
+    const complaints = JanamitraDB.rti_complaints[panchayatId] || [];
     const count = complaints.length + 1;
     return `CMP${panchayatId}${String(count).padStart(3, '0')}`;
 }
@@ -699,12 +720,12 @@ function generateComplaintId(panchayatId) {
  * @returns {object|null} Updated complaint or null if not found
  */
 function updateComplaintStatus(panchayatId, complaintId, updateData) {
-    const complaints = EGramDB.rti_complaints[panchayatId];
+    const complaints = JanamitraDB.rti_complaints[panchayatId];
     if (!complaints) return null;
-    
+
     const complaintIndex = complaints.findIndex(c => c.id === complaintId);
     if (complaintIndex === -1) return null;
-    
+
     complaints[complaintIndex] = { ...complaints[complaintIndex], ...updateData };
     return complaints[complaintIndex];
 }
@@ -715,7 +736,7 @@ function updateComplaintStatus(panchayatId, complaintId, updateData) {
  * @returns {array} Array of all complaints
  */
 function getAllComplaintsByPanchayat(panchayatId) {
-    return EGramDB.rti_complaints[panchayatId] || [];
+    return JanamitraDB.rti_complaints[panchayatId] || [];
 }
 
 /**
@@ -725,17 +746,17 @@ function getAllComplaintsByPanchayat(panchayatId) {
  * @returns {boolean} True if deleted, false if not found
  */
 function deleteComplaint(panchayatId, complaintId) {
-    const complaints = EGramDB.rti_complaints[panchayatId];
+    const complaints = JanamitraDB.rti_complaints[panchayatId];
     if (!complaints) return false;
-    
+
     const complaintIndex = complaints.findIndex(c => c.id === complaintId);
     if (complaintIndex === -1) return false;
-    
+
     complaints.splice(complaintIndex, 1);
     return true;
 }
 
 // Export for use in other files (if using modules)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EGramDB, getPanchayatByEpic, getCitizenByEpic, getPanchayatDetails, getProjectsByPanchayat, getSchemesByPanchayat, getRTIComplaintsByPanchayat, getRTIComplaintsByCitizen, loginWithEpic, loginWithAdminId, addNewProject, generateProjectId, updateProject, deleteProject, addNewScheme, generateSchemeId, updateScheme, deleteScheme, getAllSchemes, addProjectComment, getProjectComments, deleteProjectComment, addComplaint, generateComplaintId, updateComplaintStatus, getAllComplaintsByPanchayat, deleteComplaint };
+    module.exports = { JanamitraDB, getPanchayatByEpic, getCitizenByEpic, getPanchayatDetails, getProjectsByPanchayat, getSchemesByPanchayat, getRTIComplaintsByPanchayat, getRTIComplaintsByCitizen, loginWithEpic, loginWithAdminId, addNewProject, generateProjectId, updateProject, deleteProject, addNewScheme, generateSchemeId, updateScheme, deleteScheme, getAllSchemes, addProjectComment, getProjectComments, deleteProjectComment, addComplaint, generateComplaintId, updateComplaintStatus, getAllComplaintsByPanchayat, deleteComplaint };
 }

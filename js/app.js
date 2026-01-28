@@ -1,5 +1,5 @@
 /**
- * Janamithra Application Logic
+ * Janamitra Application Logic
  * Handles login, session management, and page data population
  */
 
@@ -9,14 +9,14 @@
  * Store user session after successful login
  */
 // Initialize Data from Storage if available
-if (localStorage.getItem('EGramData')) {
+if (localStorage.getItem('JanamitraData')) {
     try {
-        const savedData = JSON.parse(localStorage.getItem('EGramData'));
-        // Merge saved data into EGramDB
+        const savedData = JSON.parse(localStorage.getItem('JanamitraData'));
+        // Merge saved data into JanamitraDB
         // We do a deep merge for lists like projects/schemes, generic replace for simple keys
         Object.keys(savedData).forEach(key => {
-            if (EGramDB[key]) {
-                EGramDB[key] = savedData[key];
+            if (JanamitraDB[key]) {
+                JanamitraDB[key] = savedData[key];
             }
         });
     } catch (e) {
@@ -54,7 +54,7 @@ function storeSession(id, role) {
  * Save current Database state to localStorage
  */
 function saveToStorage() {
-    localStorage.setItem('EGramData', JSON.stringify(EGramDB));
+    localStorage.setItem('JanamitraData', JSON.stringify(JanamitraDB));
 }
 
 /**
@@ -133,11 +133,16 @@ function populateDashboard() {
  * Populate Hierarchy page with panchayat leadership data
  */
 function populateHierarchy() {
-    const session = requireAuth();
-    if (!session) return;
+    // Allow public access - use session if available, otherwise use default panchayat
+    const session = getSession();
+    let panchayat;
 
-    const { userData } = session;
-    const panchayat = userData.panchayat;
+    if (session && session.userData && session.userData.panchayat) {
+        panchayat = session.userData.panchayat;
+    } else {
+        // Default to first panchayat for public viewing
+        panchayat = JanamitraDB.panchayats['P001'];
+    }
 
     if (!panchayat) return;
 
@@ -189,12 +194,19 @@ function populateHierarchy() {
  * Populate Projects page with panchayat projects
  */
 function populateProjects() {
-    const session = requireAuth();
-    if (!session) return;
+    // Allow public access - use session if available, otherwise use default panchayat
+    const session = getSession();
+    let userData, projects, panchayat;
 
-    const { userData } = session;
-    const projects = userData.projects;
-    const panchayat = userData.panchayat;
+    if (session && session.userData) {
+        userData = session.userData;
+        projects = userData.projects;
+        panchayat = userData.panchayat;
+    } else {
+        // Default to first panchayat for public viewing
+        panchayat = JanamitraDB.panchayats['P001'];
+        projects = JanamitraDB.projects['P001'] || [];
+    }
 
     // Update page header
     const pageHeader = document.querySelector('.page-header h1');
@@ -380,8 +392,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const path = window.location.pathname;
     const page = path.split('/').pop().toLowerCase();
 
-    // Safety: Ensure EGramDB is available
-    if (typeof EGramDB === 'undefined') {
+    // Safety: Ensure JanamitraDB is available
+    if (typeof JanamitraDB === 'undefined') {
         console.error("Database not loaded!");
         return;
     }
@@ -493,8 +505,8 @@ function showAddProjectModal() {
         };
 
         // Update Global State
-        if (!EGramDB.projects[panchayatId]) EGramDB.projects[panchayatId] = [];
-        EGramDB.projects[panchayatId].push(newProject);
+        if (!JanamitraDB.projects[panchayatId]) JanamitraDB.projects[panchayatId] = [];
+        JanamitraDB.projects[panchayatId].push(newProject);
 
         // Save
         saveToStorage();
@@ -511,7 +523,7 @@ function showAddProjectModal() {
 function editProject(id) {
     const session = getSession();
     const panchayatId = session.userData.panchayat_id;
-    const project = EGramDB.projects[panchayatId].find(p => p.id === id);
+    const project = JanamitraDB.projects[panchayatId].find(p => p.id === id);
 
     if (project) {
         const newProgress = prompt(`Update Progress for ${project.name} (%):`, project.progress);

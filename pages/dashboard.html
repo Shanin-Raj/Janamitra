@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Janamithra</title>
+    <title>Dashboard | Janamitra</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -247,6 +247,57 @@
                 font-size: 1.25rem;
             }
         }
+
+        .grama-sabha-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            /* Changed from 2px primary to match other cards more */
+            border-left: 5px solid var(--ux4g-primary);
+            /* Accent like dashboard stats/hierarchy cards usually have */
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            /* Align items horizontally if needed, or just keep vertical stack but tighter */
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+        }
+
+        .gs-content {
+            flex: 1;
+        }
+
+        .gs-header h3 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+
+        .gs-body p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .btn-join {
+            background: var(--ux4g-primary);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            margin-left: 1.5rem;
+        }
+
+        .btn-join:hover {
+            background: var(--ux4g-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
     </style>
 </head>
 
@@ -261,7 +312,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
                     class="emblem">
                 <div class="logo-text">
-                    <span class="title">JANAMITHRA</span>
+                    <span class="title">JANAMITRA</span>
                     <span class="subtitle">Panchayat Dashboard</span>
                 </div>
             </a>
@@ -338,6 +389,20 @@
             <div class="section-header">
                 <h2>Explore Your Panchayat</h2>
             </div>
+
+            <!-- Grama Sabha Banner -->
+            <div class="grama-sabha-card">
+                <div class="gs-content">
+                    <div class="gs-header">
+                        <h3>Attend a Grama-Sabha</h3>
+                    </div>
+                    <div class="gs-body">
+                        <p>Description about what a grama sabha.</p>
+                    </div>
+                </div>
+                <button class="btn-join" onclick="window.location.href='digi_sabha.html'">Join Digi-Sabha</button>
+            </div>
+
             <div class="card-grid">
                 <a href="hierarchy.html" class="action-card card">
                     <div class="action-icon"><i class="fas fa-sitemap"></i></div>

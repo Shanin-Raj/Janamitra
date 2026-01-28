@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digi-Sabha | Janamitra</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gov-header {
+            background: var(--bg-white);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .emblem {
+            height: 45px;
+        }
+
+        .logo-text .title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ux4g-primary);
+        }
+
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 4rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ux4g-primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Digi-Sabha Cards */
+        .sabha-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .sabha-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sabha-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .header-live {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+        }
+
+        .header-upcoming {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .header-past {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .card-header h3 {
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .meeting-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .meeting-time {
+            color: var(--ux4g-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .meeting-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .btn-full {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tricolor-strip"></div>
+
+    <header class="gov-header">
+        <div class="container header-inner">
+            <a href="../index.html" class="logo-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Emblem"
+                    class="emblem">
+                <div class="logo-text">
+                    <span class="title">JANAMITRA</span>
+                </div>
+            </a>
+            <a href="dashboard.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </header>
+
+    <main class="container page-content animate-fade-in">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a> <span>/</span> Digi-Sabha
+        </nav>
+
+        <div class="page-header">
+            <h1>Digi-Sabha</h1>
+            <p>Participate in Grama Sabhas virtually, ensuring transparency and accessibility for all citizens.</p>
+        </div>
+
+        <div class="sabha-grid">
+
+            <!-- Live Meeting Card -->
+            <div class="sabha-card">
+                <div class="card-header header-live">
+                    <div class="card-icon"><i class="fas fa-video"></i></div>
+                    <h3>Live Grama Sabha</h3>
+                </div>
+                <div class="live-badge">
+                    <div class="pulse-dot"></div> Streaming Now
+                </div>
+                <div class="card-body">
+                    <div class="meeting-title">Annual Budget Planning 2026</div>
+                    <div class="meeting-time"><i class="far fa-clock"></i> Started at 10:00 AM</div>
+                    <div class="meeting-desc">
+                        The Ward 5 development planning meeting is currently in progress. Join now to voice your
+                        opinions on budget allocation.
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-full"
+                        onclick="alert('Connecting to secure video conference...')">
+                        <i class="fas fa-sign-in-alt"></i> Join Meeting
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upcoming Meeting Card -->
+            <div class="sabha-card">
+                <div class="card-header header-upcoming">
+                    <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Upcoming Meeting</h3>
+                </div>
+                <div class="card-body">
+                    <div class="meeting-title">Health & Sanitation Review</div>
+                    <div class="meeting-time"><i class="far fa-calendar"></i> Feb 15, 2026 • 10:00 AM</div>
+                    <div class="meeting-desc">
+                        Discussion on new waste management policies and review of PHC facilities. Agenda includes public
+                        health report.
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline btn-full"
+                        onclick="alert('Reminder set! You will be notified 1 day before.')">
+                        <i class="far fa-bell"></i> Set Reminder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Past Meetings Card -->
+            <div class="sabha-card">
+                <div class="card-header header-past">
+                    <div class="card-icon"><i class="fas fa-history"></i></div>
+                    <h3>Past Meetings</h3>
+                </div>
+                <div class="card-body">
+                    <div class="meeting-title">General Body Meeting</div>
+                    <div class="meeting-time"><i class="far fa-calendar-check"></i> Dec 20, 2025</div>
+                    <div class="meeting-desc">
+                        Review of 2025 projects completion status and feedback collection.
+                        <br><strong>Attendance:</strong> 145 citizens
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline btn-full"
+                        onclick="window.open('http://klaproceedings.niyamasabha.org/digital/index.php?pg=search_result#', '_blank')">
+                        <i class="fas fa-file-pdf"></i> View Minutes
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Include Database and App Scripts -->
+    <script src="../js/database.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
