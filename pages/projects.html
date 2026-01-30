@@ -316,13 +316,13 @@
                     <span class="title">JANAMITRA</span>
                 </div>
             </a>
-            <a href="../index.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+            <a href="../index.html" class="btn btn-outline" id="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
         </div>
     </header>
 
     <main class="container page-content animate-fade-in">
         <nav class="breadcrumb">
-            <a href="../index.html">Home</a> <span>/</span> Panchayat Projects
+            <a href="../index.html" id="breadcrumb-home">Home</a> <span>/</span> Panchayat Projects
         </nav>
 
         <div class="page-header">
@@ -494,6 +494,22 @@
 
         // Load projects on page load
         document.addEventListener('DOMContentLoaded', loadProjects);
+
+        // Handle navigation based on login status
+        document.addEventListener('DOMContentLoaded', function () {
+            const session = getSession();
+            // DEBUG: console.log('Session check:', session);
+            if (session && session.isLoggedIn) {
+                const backBtn = document.getElementById('back-btn');
+                const breadcrumbHome = document.getElementById('breadcrumb-home');
+
+                if (backBtn) backBtn.href = 'dashboard.html';
+                if (breadcrumbHome) {
+                    breadcrumbHome.href = 'dashboard.html';
+                    breadcrumbHome.textContent = 'Dashboard';
+                }
+            }
+        });
     </script>
 </body>
 
