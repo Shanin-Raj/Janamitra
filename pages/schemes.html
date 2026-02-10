@@ -177,6 +177,53 @@
             margin-bottom: 1rem;
             opacity: 0.5;
         }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .page-content {
+                padding-top: 85px;
+                padding-bottom: 2rem;
+            }
+
+            .scheme-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 1rem;
+            }
+
+            .filter-bar {
+                gap: 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+                flex-wrap: nowrap;
+            }
+
+            .filter-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .emblem {
+                height: 35px;
+            }
+
+            .logo-text .title {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .scheme-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scheme-card {
+                padding: 1.25rem;
+            }
+        }
     </style>
 </head>
 

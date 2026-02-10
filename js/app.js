@@ -13,11 +13,9 @@ if (localStorage.getItem('JanamitraData')) {
     try {
         const savedData = JSON.parse(localStorage.getItem('JanamitraData'));
         // Merge saved data into JanamitraDB
-        // We do a deep merge for lists like projects/schemes, generic replace for simple keys
+        // Include all keys from saved data, not just existing ones
         Object.keys(savedData).forEach(key => {
-            if (JanamitraDB[key]) {
-                JanamitraDB[key] = savedData[key];
-            }
+            JanamitraDB[key] = savedData[key];
         });
     } catch (e) {
         console.error("Failed to load saved data", e);

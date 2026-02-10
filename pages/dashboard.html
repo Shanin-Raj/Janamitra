@@ -239,12 +239,93 @@
         }
 
         @media (max-width: 768px) {
-            .slide img {
-                height: 280px;
+            .carousel-section {
+                height: 250px;
+            }
+
+            .carousel-slide {
+                flex-direction: column;
+                text-align: center;
             }
 
             .slide-content h2 {
                 font-size: 1.25rem;
+            }
+
+            .slide img {
+                /* Changed from .slide-image to .slide img */
+                width: 100%;
+                height: 150px;
+            }
+
+            .user-menu .welcome span {
+                /* .welcome span does not exist, removed */
+                display: none;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .grama-sabha-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .grama-sabha-card .btn-join {
+                /* Changed from .btn to .btn-join */
+                width: 100%;
+                justify-content: center;
+                margin-left: 0;
+                /* Added to center button */
+                margin-top: 1rem;
+                /* Added spacing */
+            }
+
+            .action-card {
+                padding: 1.25rem;
+            }
+
+            .action-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .header-inner {
+                padding: 0 0.5rem;
+            }
+
+            .user-menu {
+                gap: 0.5rem;
+            }
+
+            .dashboard {
+                padding-top: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-section {
+                height: 200px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .logo-text .title {
+                font-size: 1rem;
+            }
+
+            .emblem {
+                height: 35px;
             }
         }
 

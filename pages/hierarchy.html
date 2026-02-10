@@ -188,6 +188,49 @@
 
             .contact-info {
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .ward-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .page-content {
+                padding-top: 85px;
+                padding-bottom: 2rem;
+            }
+
+            .emblem {
+                height: 35px;
+            }
+
+            .logo-text .title {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ward-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ward-card {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .president-card {
+                padding: 1.25rem;
+            }
+
+            .leader-img {
+                width: 80px;
+                height: 80px;
             }
         }
     </style>

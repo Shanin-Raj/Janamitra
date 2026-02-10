@@ -241,12 +241,26 @@
         }
 
         @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 100px;
+                padding-bottom: 2.5rem;
+            }
+
             .hero-section h1 {
                 font-size: 1.75rem;
             }
 
+            .hero-section p {
+                font-size: 0.95rem;
+            }
+
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-item .value {
+                font-size: 1.75rem;
             }
 
             .logo-text .title {
@@ -255,6 +269,135 @@
 
             .emblem {
                 height: 40px;
+            }
+
+            .header-actions .btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .features-section {
+                padding: 3rem 0;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .modal-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .modal-action-card {
+                min-height: 100px;
+                padding: 0.75rem;
+            }
+
+            .overview-card {
+                padding: 1.25rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+                border-radius: 16px;
+                padding: 8px;
+            }
+
+            .search-box button {
+                border-radius: 12px;
+                width: 100%;
+            }
+
+            .search-box input {
+                padding: 10px 14px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .main-footer {
+                padding: 2rem 0 1rem;
+            }
+
+            .stats-section {
+                padding: 2rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.4rem;
+            }
+
+            .hero-section p {
+                font-size: 0.85rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .stat-item .value {
+                font-size: 1.5rem;
+            }
+
+            .stat-item .label {
+                font-size: 0.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-section {
+                gap: 0.5rem;
+            }
+
+            .emblem {
+                height: 35px;
+            }
+
+            .logo-text .title {
+                font-size: 1rem;
+            }
+
+            .logo-text .subtitle {
+                font-size: 0.65rem;
+            }
+
+            .header-actions {
+                gap: 0.5rem;
+            }
+
+            .overview-card {
+                padding: 1rem;
+            }
+
+            .overview-header h2 {
+                font-size: 1.15rem;
             }
         }
 

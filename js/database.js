@@ -239,6 +239,9 @@ const JanamitraDB = {
         last_updated: "2026-01-15"
     },
 
+    // Project Comments (stored separately for persistence)
+    project_comments: {},
+
     // Projects by Panchayat
     projects: {
         "P001": [
