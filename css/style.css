@@ -39,35 +39,19 @@
     font-family: 'Noto Sans', system-ui, sans-serif;
 }
 
-/* Security Disclaimer Banner */
-.security-disclaimer {
-    background-color: #ffcc00;
-    color: #000;
-    text-align: center;
-    padding: 8px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+/* Security Disclaimer Banner - REMOVED */
 
-/* Push content down for the banner */
+/* Body Reset */
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     min-height: 100vh;
-    padding-top: 35px;
-    /* Space for disclaimer */
 }
 
 /* Adjust Fixed Header */
 .gov-header {
-    top: 40px;
-    /* 35px banner + 5px gap */
+    top: 4px;
+    /* Reset to original top spacing */
 }
 
 
