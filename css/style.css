@@ -32,6 +32,13 @@
     --transition: all 0.25s ease;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', system-ui, sans-serif;
+}
+
 /* Security Disclaimer Banner */
 .security-disclaimer {
     background-color: #ffcc00;
